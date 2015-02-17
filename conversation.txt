@@ -1,0 +1,46 @@
+It would be pretty cool to write a full-fledged command line review suite for git, that operated on a 'review' directory living inside the .git directory.
+
+It might even be interesting to write it as an extension to git. Not really sure if that'd be a good idea or not.
+
+Point is - information about a repo's review process is tied specifically to that repository. Different projects/branches/forks can set things up differently, as they feel the need.
+
+*shrugs* I think it's a cool idea, anyway.
+
+It'd be convenient if it worked smoothly both for basic, multi-user command-line operations, and with more complex installations that rely on things like gitosis or gitolite, but I'm not sure how feasible that really is...
+
+a bit of conversation with Bob lately:
+
+Nate Eagleson 1:40 PM
+So,
+1:40 PM
+we should define a syntax for annotating diffs,
+1:41 PM
+write a few command-line tools for managing annotated diffs and git,
+1:41 PM
+then slap a web interface on it.
+1:41 PM
+Right?
+Bob Stouffer 1:45 PM
+Also some method of marking that a given patch set is "approved".
+Nate Eagleson 1:45 PM
+Well, yeah.
+1:46 PM
+I suppose that would matter.
+1:46 PM
+Do you worry about the possibility of merging with master breaking stuff?
+Bob Stouffer 1:46 PM
+You mean rebaseless merges?
+Nate Eagleson 1:46 PM
+Yeah, that.
+Bob Stouffer 1:47 PM
+It bugs me. I always try to rebase before merging.
+Nate Eagleson 1:47 PM
+As do I.
+1:47 PM
+I guess it wouldn't be hard to make that a toggleable setting.
+1:47 PM
+Approvals just store the two commits that were approved for merging,
+1:47 PM
+rather than marking one commit as 'good'.
+Bob Stouffer 1:48 PM
+"good" is an annotation

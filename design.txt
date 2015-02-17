@@ -1,0 +1,14 @@
+People push branches to a review repo.
+
+We add a tool for annotating commits with comments, and a web interface for
+browsing branches/commenting on commits.
+
+Any branch can be configured to reject pushes unless the new tip commit is
+approved.
+
+Push approvals map a branch's name to the approved tip commit.
+
+If a branch's history needs to be rewritten, we recommend doing so and pushing
+it as a new branch, so that the old history is not lost. This is one place where
+Gerrit's Change-Id approach is superior - it can follow the change through
+rebases.
