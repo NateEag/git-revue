@@ -64,8 +64,8 @@ That might be achievable by writing a new git protocol and an associated remote
 helper, as described [here](https://rovaughn.github.io/2015-2-9.html). I'm not
 sure how much of git's internals we can hijack that way.
 
-On pull and fetches, the protocol would have to not return tags that were created
-solely for code review history preservation (unless you asked for them). On
-pushes, we detect rebases and create history preservation tags as needed (along
-with any necessary metadata). Review preservation tags would follow a naming
-scheme so that they're easy to detect.
+On pull and fetches, the protocol would have to not return tags that were
+created solely for code review history preservation (unless you asked for
+them). On pushes, we detect rebases and create history preservation tags as
+needed (along with any necessary metadata). Review preservation tags would
+follow a naming scheme so that they're easy to detect.
