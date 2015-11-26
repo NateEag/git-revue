@@ -1,12 +1,19 @@
-It would be pretty cool to write a full-fledged command line review suite for git, that operated on a 'review' directory living inside the .git directory.
+It would be pretty cool to write a full-fledged command line review suite for
+git, that operated on a 'review' directory living inside the .git directory.
 
-It might even be interesting to write it as an extension to git. Not really sure if that'd be a good idea or not.
+It might even be interesting to write it as an extension to git. Not really
+sure if that'd be a good idea or not.
 
-Point is - information about a repo's review process is tied specifically to that repository. Different projects/branches/forks can set things up differently, as they feel the need.
+Point is - information about a repo's review process is tied specifically to
+that repository. Different projects/branches/forks can set things up
+differently, as they feel the need.
 
 *shrugs* I think it's a cool idea, anyway.
 
-It'd be convenient if it worked smoothly both for basic, multi-user command-line operations, and with more complex installations that rely on things like gitosis or gitolite, but I'm not sure how feasible that really is...
+It'd be convenient if it worked smoothly both for basic, multi-user
+command-line operations, and with more complex installations that rely on
+things like gitosis or gitolite, but I'm not sure how feasible that really
+is...
 
 a bit of conversation with Bob lately:
 
