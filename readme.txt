@@ -30,9 +30,16 @@ to merging an approved commit ID.
 
 Anyone can use the web or command-line interfaces to leave a comment on a
 commit. A comment may apply to the whole commit, to a specific file in the
-commit, or to a specific line in a commit. A comment may stand alone or be in
-response to another comment. [diffscuss](https://github.com/hut8labs/diffscuss)
-might be a great storage format for comments.
+commit, or to a specific line in a commit. It might be useful to allow comments
+on diffs as such, too, and to treat the 'comment on commit' as a diff from
+commitref^..commitref?
+
+A comment may stand alone or be in response to another comment.
+
+[diffscuss](https://github.com/hut8labs/diffscuss) might be a good format for
+writing reviews, which could then be converted to some git-friendly storage
+format for pushing, pulling, and the like.
+
 
 
 Implementation
@@ -45,6 +52,10 @@ cannot forge approvals.
 
 Note the existence of git notes. They might be useful for recording review
 messages.
+
+Consider using custom git objects? With a custom protocol, pushing them around
+might be pretty simple, and we could perhaps avoid polluting the tag and branch
+lists. However, that leaves us at risk of breaking the rebase-following behavior.
 
 
 Handling Rebases
@@ -69,3 +80,7 @@ created solely for code review history preservation (unless you asked for
 them). On pushes, we detect rebases and create history preservation tags as
 needed (along with any necessary metadata). Review preservation tags would
 follow a naming scheme so that they're easy to detect.
+
+What about cases where you need to nuke an old branch post-rebase? Well, should
+be simple enough - manually delete the references and demand git take out the
+garbage, per usual.
