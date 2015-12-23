@@ -2,7 +2,7 @@
 git-revue
 =========
 
-git-revue is a lightweight, distributed code review tool for git.
+git-revue is a distributed code review tool for git.
 
 It provides command-line and web interfaces. The web interface serves as
 both code browser and code review tool.
@@ -30,16 +30,16 @@ to merging an approved commit ID.
 
 Anyone can use the web or command-line interfaces to leave a comment on a
 commit. A comment may apply to the whole commit, to a specific file in the
-commit, or to a specific line in a commit. It might be useful to allow comments
+commit, to specific lines in a commit (usually in one file), or even specific
+characters within a line in a commit. It might be useful to allow comments
 on diffs as such, too, and to treat the 'comment on commit' as a diff from
 commitref^..commitref?
 
 A comment may stand alone or be in response to another comment.
 
 [diffscuss](https://github.com/hut8labs/diffscuss) might be a good format for
-writing reviews, which could then be converted to some git-friendly storage
-format for pushing, pulling, and the like.
-
+reading and writing reviews. They could be stored, pushed, and pulled as git
+notes or similar.
 
 
 Implementation
@@ -61,7 +61,7 @@ lists. However, that leaves us at risk of breaking the rebase-following behavior
 Handling Rebases
 ----------------
 
-When you rebase a branch, a `git gc` will delete the old commits.
+When you rebase a branch, a `git gc` can delete the old commits.
 
 If those commits have comments or approvals, letting that happen removes
 important historical data.
@@ -71,16 +71,31 @@ How can we prevent that from happening?
 Tags are the obvious answer, but that would clutter things badly. If they only
 lived in the review repository, that might not be a disaster.
 
-That might be achievable by writing a new git protocol and an associated remote
-helper, as described [here](https://rovaughn.github.io/2015-2-9.html). I'm not
-sure how much of git's internals we can hijack that way.
+On pull and fetches, by default we should not return tags that were created
+solely for code review history preservation (unless you asked for them).
 
-On pull and fetches, the protocol would have to not return tags that were
-created solely for code review history preservation (unless you asked for
-them). On pushes, we detect rebases and create history preservation tags as
-needed (along with any necessary metadata). Review preservation tags would
-follow a naming scheme so that they're easy to detect.
+That could be achieved by storing review-related tags in
+[namespaced refspecs](https://git-scm.com/book/en/v2/Git-Internals-The-Refspec#Pushing-Refspecs),
+and having git-revue configure remotes with custom fetch configurations, so you
+don't retrieve a mountain of rebase-preservation tags unless you want them. We
+could also use custom commands as wrappers around push/fetch with custom
+refspecs, to keep the UI cleaner.
 
-What about cases where you need to nuke an old branch post-rebase? Well, should
-be simple enough - manually delete the references and demand git take out the
-garbage, per usual.
+On pushes, we detect rebases and create history preservation tags as needed
+(along with any necessary metadata), in a namespace such as
+ref/tags/review-history.
+
+That could be done by writing a new git protocol and an associated remote helper,
+as described [here](https://rovaughn.github.io/2015-2-9.html). However, a
+simpler alternative would be a pre-receive or update hook in the review repo -
+if a new ref is not a fast-forward, create the necessary history preservation
+tags. If anything fails, exit non-zero, so that history cannot be lost by
+accident.
+
+This is not truly distributed - for that, the hooks would probably need to be
+pre-rebase (and other history-changing comands), but you would then have to
+push them manually.
+
+What about cases where you need to nuke an old branch post-rebase (to keep
+history clean for bisects, for instance)? Well, should be simple enough -
+manually delete the references and demand git take out the garbage, per usual.
