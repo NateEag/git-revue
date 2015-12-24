@@ -96,6 +96,6 @@ This is not truly distributed - for that, the hooks would probably need to be
 pre-rebase (and other history-changing comands), but you would then have to
 push them manually.
 
-What about cases where you need to nuke an old branch post-rebase (to keep
-history clean for bisects, for instance)? Well, should be simple enough -
-manually delete the references and demand git take out the garbage, per usual.
+What about cases where you need to nuke an old branch post-rebase (due to a
+copyright violation, for instance)? Well, should be simple enough - manually
+delete the references and demand git take out the garbage, per usual.
