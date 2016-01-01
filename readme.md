@@ -94,8 +94,15 @@ accident.
 
 This is not truly distributed - for that, the hooks would probably need to be
 pre-rebase (and other history-changing comands), but you would then have to
-push them manually.
+push the tags manually.
 
 What about cases where you need to nuke an old branch post-rebase (due to a
 copyright violation, for instance)? Well, should be simple enough - manually
 delete the references and demand git take out the garbage, per usual.
+
+
+Existing Projects
+-----------------
+
+[git-appraise](https://github.com/google/git-appraise) appears to cover a lot of
+this ground.
