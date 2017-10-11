@@ -1,4 +1,3 @@
-=========
 git-revue
 =========
 
@@ -105,4 +104,4 @@ Existing Projects
 -----------------
 
 [git-appraise](https://github.com/google/git-appraise) appears to cover a lot of
-this ground.
+this ground. I did most of the above design work before I realized it existed.
