@@ -105,3 +105,7 @@ Existing Projects
 
 [git-appraise](https://github.com/google/git-appraise) appears to cover a lot of
 this ground. I did most of the above design work before I realized it existed.
+
+[git-series](https://github.com/git-series/git-series) looks like it does the heavy
+lifting around tracking rebases I want. It would be instructive to understand what
+approach it takes.
