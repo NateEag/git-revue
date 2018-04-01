@@ -49,13 +49,12 @@ setup. The key should be used solely for git-revue. It must have a password
 associated with it, so that even if someone malicious obtains the key, they
 cannot forge approvals.
 
-Note the existence of git notes. They might be useful for recording review
-messages.
-
 Consider using custom git objects? With a custom protocol, pushing them around
 might be pretty simple, and we could perhaps avoid polluting the tag and branch
 lists. However, that leaves us at risk of breaking the rebase-following behavior.
 
+Git notes could be used as a mechanism for storing review comments. A major
+drawback to notes is that you can only have one per commit.
 
 Handling Rebases
 ----------------
@@ -84,16 +83,14 @@ On pushes, we detect rebases and create history preservation tags as needed
 (along with any necessary metadata), in a namespace such as
 ref/tags/review-history.
 
-That could be done by writing a new git protocol and an associated remote helper,
-as described [here](https://rovaughn.github.io/2015-2-9.html). However, a
-simpler alternative would be a pre-receive or update hook in the review repo -
+That could be done with a pre-receive or update hook in the review repo -
 if a new ref is not a fast-forward, create the necessary history preservation
 tags. If anything fails, exit non-zero, so that history cannot be lost by
 accident.
 
 This is not truly distributed - for that, the hooks would probably need to be
 pre-rebase (and other history-changing comands), but you would then have to
-push the tags manually.
+push the tags manually, and you'd also wind up with a whole lot of tags.
 
 What about cases where you need to nuke an old branch post-rebase (due to a
 copyright violation, for instance)? Well, should be simple enough - manually
