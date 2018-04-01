@@ -103,9 +103,17 @@ delete the references and demand git take out the garbage, per usual.
 Existing Projects
 -----------------
 
-[git-appraise](https://github.com/google/git-appraise) appears to cover a lot of
-this ground. I did most of the above design work before I realized it existed.
+[git-appraise](https://github.com/google/git-appraise) appears to cover a lot
+of this ground. I did most of the above design work before I realized it
+existed.
 
 [git-series](https://github.com/git-series/git-series) looks like it does the heavy
 lifting around tracking rebases I want. It would be instructive to understand what
 approach it takes.
+
+[Feature
+Explorer](https://blog.janestreet.com/putting-the-i-back-in-ide-towards-a-github-explorer/)
+is a proprietary tool used at a quant shop called Jane Street. It's pretty
+slick in a number of ways, judging from the blog post, and is reminiscent of
+the kind of review system I've long desired (though it does miss in a few
+places, I think, but it looks much better than most systems I've used).
